@@ -1,0 +1,29 @@
+
+
+https://github.com/arunavan/sudaksha-javafoundation 
+
+
+What is class?
+What is an object?
+Define constructor and types of constructors?
+How many datatypes in java and define them?
+Significance of System.out.println() and public sttaic void main(String args[])
+Explain JDK,JVM and JRE.
+
+1.Coding assignment - 02/01/2022
+  Java command line arguments example with finding sum and avergae of 3 numbers
+
+2.Coding assignment - 02/01/2022
+  Java example  to read 3 numbers using Scanner ,finding sum and avergae of 
+  3 numbers?
+
+3.Coding assignment - 02/01/2022
+
+Create Employee class with attributes
+empId,empName,department,designation,salary and bonus.
+
+create all types of constructors, find bonus value as 10% of salary for given
+employeeobject.
+
+use EmployeeTest.java to run the above program.
+
