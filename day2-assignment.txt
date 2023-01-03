@@ -1,0 +1,26 @@
+Explain Object class methods.
+Explain Loacl,instance and static variables
+differenc ebetween String,StringBuffer,stringBuilder
+What are wrapper classes?Explain
+What is methods overloading?
+Explain arrays.
+1.Coding assignment - 03/01/2022
+  Write program to read Array ,find sum of array and average of array using
+  different methods
+2.Coding assignment - 03/01/2022
+  Write a program for Parsing and Formatting a Number into Binary, 
+   Octal, and Hexadecimal
+3.Coding assignment - 03/01/2022
+  Write a program which creates a class Employee with attributes empNo, empName,
+  empSalary,empRating,designation
+
+  Override the method toString() of Object class which displays the Employee 
+  Object value in readable format (which displays empNo, empName, empSalary)
+ 
+  Overload methods to 
+  1.calculateBonus() based on rating >4 bonus=salary*0.10
+  2.calculateBonus() based on designation='Manager'  bonus=salary*0.30
+   
+
+
+
