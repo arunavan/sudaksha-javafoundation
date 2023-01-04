@@ -1,0 +1,44 @@
+https://youtu.be/JyZszRpeYo0
+
+
+Explain encapsulation and inheritance
+Explain purpose of this and super keywords, constructor chaining
+what is method overriding?
+Explain Method  overloading vs Method overriding
+What is Data abstraction?
+What is Abstract class and explain.
+What is an interface and explain.
+
+
+1.Coding assignment - 04/01/2022
+  Write java program to create Employee class 
+  empInt,empName,email,mobile
+  Write a subclass ContractEmployee class
+  durationOfContract,pay
+  us this keyword,superkeyword 
+  
+
+2.Coding assignment - 04/01/2022
+  Create a data type PhoneNumber.java that represents a US phone number. 
+  The constructor should take three string arguments, the area code 
+  (3 decimal digits), the exchange (3 decimal digits) and the extension 
+  (4 decimal digits). Include a toString method that prints out phone numbers 
+  of the form (800) 867-5309. Include a method so that p.equals(q) returns 
+  true if the phone numbers p and q are the same, and false otherwise.
+
+3.Coding assignment - 04/01/2022
+  Create a class Game to represent a Sport Person. Provide a function 
+  displayInfo() in this class to print the information about this game.. 
+  Derive Cricket, Football and Tennis classes from the Game class. Override 
+  the displayInfo() function in each of these classes to print additional 
+  information describing that game in brief.Create a class TestGame. Write main
+  function to do the following:
+  Declare an array of Game references of size 5
+  Populate this array with any combination of Cricket, Football andTennis.
+  Check the polymorphic behavior of the displayInfo() method
+
+ 
+   
+
+
+
