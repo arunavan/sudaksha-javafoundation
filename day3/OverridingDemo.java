@@ -6,10 +6,12 @@ class Ride{
 }
 class Mride extends Ride{
 	@Override
-	void sq(int a) {
-		System.out.println("Perimeter:"+(4*a));
+	void sq(int  b) {
+		System.out.println("Perimeter:"+(4*b));
 	}
 }
+
+
 public class OverridingDemo extends Mride {
 	@Override
 	void sq(int a) {
@@ -18,10 +20,14 @@ public class OverridingDemo extends Mride {
 	public static void main(String[] args) {
 		Ride r=new Ride();
 		r.sq(5);
-		Mride m=new Mride();
-		m.sq(6);
-		OverridingDemo o=new OverridingDemo();
-		o.sq(6);
+		r=new Mride();
+		r.sq(6);
+		r=new OverridingDemo();
+		r.sq(6);
+		
+		Ride r1=new Mride();  // implicit, int to double - reference typecasting
+		Mride m1=(Mride)new Ride(); // explicit -double to int  - ecplicit - reference typecasting
+		
 	}
 
 }
