@@ -1,0 +1,71 @@
+
+
+Explain static keyword,static variables,methods, class and static blocks
+
+Explain purpose of final keyword
+what is Exception?
+Explain exception handling tehcniques?
+try-catch, try-catch-finally, nested try-catch 
+Explain throws and exception propagation
+How to create custom exception
+Difference between throws and throw.
+
+1.Coding assignment - 05/01/2022
+  Write a program to calculate area of a rectangle and area of a square by 
+  using method overloading. Take the input for dimension of rectangle and 
+  square from console. Handle appropriate exception in order to stop abnormal
+  termination of execution
+  
+
+2.Coding assignment - 05/01/2022
+  Create an array of employeenames in a String array.
+  if name is not in the employees list. Create a user defined exception to handle 
+  this case. Use appropriate data structure to store employee information
+
+3.Coding assignment - 05/01/2022
+  Write a program in Java to display the names and roll numbers of students. 
+  Initialize respective array variables for 10 students. Handle 
+  ArrayIndexOutOfBoundsException, so that any such problem doesn't cause illegal 
+  terminations of program.
+
+4.Create a class called AverageCalculator that has the following method:
+  public double calAverage(int n)
+  This method receives an integer as a parameter and calculates the average 
+  of first n natural numbers. If n is not a natural number, throw an exception 
+  IllegalArgumentException with an appropriate message.
+
+5.Create a class  BankAccount having the members as given below:
+ accno	int
+ custname	String
+ acctype	String (indicates ‘Savings’ or ‘Current’)
+ balance	float
+
+Include the following methods in the BankAccount class:
+void	deposit(float amt);
+void	withdraw(float amt);
+float	getBalance();
+
+deposit(float amt) method allows you to credit an amount into the current balance. 
+If amount is negative, throw an exception InvalidAmountException to block the 
+operation from being performed.
+
+withdraw(float amt) method allows you to debit an amount from the current balance. 
+Please ensure a minimum balance of Rs.1000/- in the account for savings account 
+and Rs.5000/- for current account, else throw an exception InsufficientFunds and 
+block the withdrawal operation.
+Also throw an exception InvalidAmountException to block the operation from being 
+performed if the amt parameter passed to this function is negative.
+
+Add constructor in BankAccount to which you will pass, accno, custname, acctype 
+and initial balance and check whether the balance is less than 1000 in case of 
+savings account and less than 5000 in case of a current account. If so, then raise 
+a LowBalanceException. 
+In either case if the balance is negative then raise the InvalidAmountException 
+exception accordingly.
+
+
+ 
+   
+
+
+
