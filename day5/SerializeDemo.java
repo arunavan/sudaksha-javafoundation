@@ -1,30 +1,35 @@
+package com.tra.day5;
+
 import java.io.*;
 
-class Dog implements Serializable
-{
-	int i = 10;
-
-	int j = 20;
+class Account  implements Serializable
+{  Integer id;
+   String bankName;
+	  Account() {
+	    this.id = 10;
+       this.bankName = "AXIS";
+	  }
 }
 
 class SerializeDemo
 {
 	public static void main(String args[])throws Exception
 	{
-		Dog d1 = new Dog();
+		Account a1 = new Account();
+		System.out.println("before serilization "+a1.id+"  "+a1.bankName);
+		FileOutputStream fos = new FileOutputStream("d:\\account.txt");  //serialization
 
-		FileOutputStream fos = new FileOutputStream("abc.txt");
+		ObjectOutputStream oos = new ObjectOutputStream(fos);  //copy state of object into file
 
-		ObjectOutputStream oos = new ObjectOutputStream(fos);
+		oos.writeObject(a1); //3
 
-		oos.writeObject(d1);
-
-		FileInputStream fis = new FileInputStream("abc.txt");
+		FileInputStream fis = new FileInputStream("d:\\account.txt");
 
 		ObjectInputStream ois = new ObjectInputStream(fis);
 
-		Dog d2 = (Dog)ois.readObject();
+		Account a2 = (Account)ois.readObject();  //deserialization
 
-		System.out.println(d2.i+"--------"+d2.j);
+		System.out.println("after deserialization:"+a1.id+"--------"+a2.bankName);
+	
 	}
 }
