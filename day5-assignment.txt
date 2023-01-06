@@ -1,0 +1,41 @@
+
+
+Explain Multitasking vs Multithreading?
+How many ways to create thead in java
+Explain Thread life cyle?
+Explain bytestreams vs character streams
+What is serialization and how to do?
+Explain file operations.
+
+1.Coding assignment - 06/01/2022
+  
+  Write a program to display the complete contents (until the last node) of any 
+  given folder.
+  (Note :  Given a folder name, try to print all the folders inside it and 
+   even sub-folders inside each till the end. Make use of recursion.
+   Print only folders and not files)
+
+
+2.Coding assignment - 06/01/2022
+  Create a file search utility which searches for a given file in a given path.
+ 
+3.Coding assignment - 06/01/2022
+  Write a program which takes source file and destination file as input 
+  from command line arguments. It copies the source file contents to destination 
+  file.  If source file does not exist, it should throw FileNotFoundException. 
+  If destination file does not exist, it should be created.  If it exists, 
+  program should ask that, “whether you want to overwrite? Yes/No”. 
+  On the basis of user choice, appropriate action should be taken.  
+  (Note: Files may be any type of files like java files, exe files, 
+  text files etc.)
+
+  
+
+4.Coding assignment - 06/01/2022
+  Write a program which reads an Student class object from the file  
+  “Student.dat” using serialization.
+  
+
+5.Coding assignment - 06/01/2022
+  Write a program which demonstrates the methods available in File class
+
