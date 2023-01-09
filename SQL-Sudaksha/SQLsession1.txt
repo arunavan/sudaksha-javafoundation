@@ -1,0 +1,102 @@
+SQL> connect sys as sysdba;    -> to connect to database
+Enter password:
+Connected.
+SQL> create user pms identified by pms;   -> to create user account
+
+User created.
+
+SQL> grant connect,resource to pms;   -> to allow permission to connect to db
+
+Grant succeeded.
+SQL> connect pms/pms;
+Connected
+SQL>SQL> create table product(id number primary key,name varchar(20),
+                                             price number);
+Table created.
+SQL> insert into product values(1,'box',99);
+1 row created.
+SQL> insert into product values(2,'table',199);
+1 row created.
+SQL> insert into product values(3,'pen',59);
+1 row created.
+SQL> select * from product;
+SQL> select id,name from product;
+        ID NAME
+---------- --------------------
+         1 box
+         2 table
+         3 pen
+
+SQL> select id ||'='||name from product;
+
+ID||'='||NAME
+-------------------------------------------------------------
+1=box
+2=table
+3=pen
+
+SQL> alter table emp drop column age;
+
+SQL> alter table emp add (addredd number);
+
+SQL> alter table emp modify (address varchar);
+
+SQL> alter table emp modify (address varchar(20));
+
+Table altered.
+
+SQL> alter table emp modify (address varchar(25));
+
+Table altered.
+
+SQL> alter table emp modify (address varchar(15));
+
+SQL> truncate table emp;
+
+Table truncated.
+
+SQL> drop table empbackup;
+
+SQL> create table student(id number primary key,name varchar(20),dob date);
+
+Table created.
+SQL> insert into student values(102,'oscarstanley','04-nov-1993');
+
+SQL> select * from empbackup;
+
+        ID NAME
+---------- --------------------
+         1 ram
+         2 raj
+
+SQL> create view v1 as select * from empbackup;
+
+View created.
+
+
+SQL> select * from v1;
+
+        ID NAME
+---------- --------------------
+         1 ram
+         2 raj
+
+SQL> create view v2 as select name from empbackup;
+
+View created.
+
+SQL> select * from v2;
+
+NAME
+--------------------
+ram
+raj
+
+SQL> create view v3 as select name from empbackup where id<2;
+
+View created.
+
+
+
+
+
