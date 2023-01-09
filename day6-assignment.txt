@@ -1,0 +1,30 @@
+
+https://www.oracle.com/in/database/technologies/xe-downloads.html
+
+
+Explain collection hierarchy?
+Explain all methods of Collection interface
+List interface amd implementation classes of List
+List vs Set 
+Explain Set implementation classes
+Explain Map interface and implementation classes
+Comparable vs Comparator
+
+1.Coding assignment - 07/01/2022
+Write a java program to store the information of students in a HashSet which 
+include name and age. 
+Make sure that no duplicate Students are getting added into the Collection.
+(override equals and hashCode() methods)
+Student Class will name and age.
+
+  
+2.Coding assignment - 07/01/2022
+ Write a class StateCapitalMap by using child class of java.util.HashMap. 
+ This mapping class will allow the user to add new state-capitalcity pair in to 
+ it. 
+ User can get the city of state by calling get method on this class. 
+ Duplicate city entries are not allowed, 
+  1.getAllCities
+  2.getAllStates
+  3.getAllStateandCapitacity pairs
+ 
