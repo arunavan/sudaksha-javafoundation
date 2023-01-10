@@ -1,0 +1,228 @@
+
+SQL> Create table student (sid number primary key ,name varchar(20),address varchar(20),age number);
+
+Table created.
+
+SQL> insert into student values(1,'ram','hyd',20);
+
+1 row created.
+
+SQL> insert into student values(2,'raj','chennai',22);
+
+1 row created.
+
+SQL> insert into student values(3,'oscar','tanzania',22);
+
+1 row created.
+
+SQL> insert into student values(4,'bahati','tanzania',22);
+
+1 row created.
+
+SQL> insert into student values(5,'janquelin','tanzania',22);
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from student;
+
+       SID NAME                 ADDRESS                     AGE
+---------- -------------------- -------------------- ----------
+         1 ram                  hyd                          20
+         2 raj                  chennai                      22
+         3 oscar                tanzania                     22
+         4 bahati               tanzania                     22
+         5 janquelin            tanzania                     22
+
+SQL> Create table course (cid number primary key,cname varchar(20),startdate date,sid number references student(sid));
+
+Table created.
+
+SQL> insert into course values(101,'java','09-Jan-2022',2);
+
+1 row created.
+
+SQL> insert into course values(102,'oracle','09-Jan-2022',3);
+
+1 row created.
+
+SQL> insert into course values(104,'php','09-Jan-2022',1);
+
+1 row created.
+
+SQL> insert into course values(103,'spring','09-Jan-2022',null);
+
+1 row created.
+
+SQL> insert into course values(105,'hibernate','09-Jan-2022',null);
+
+1 row created.
+
+SQL> insert into course values(106,'mysql','09-Jan-2022',null);
+
+1 row created.
+
+SQL> select * from course;
+
+       CID CNAME                STARTDATE        SID
+---------- -------------------- --------- ----------
+       101 java                 09-JAN-22          2
+       102 oracle               09-JAN-22          3
+       104 php                  09-JAN-22          1
+       103 spring               09-JAN-22
+       105 hibernate            09-JAN-22
+       106 mysql                09-JAN-22
+
+6 rows selected.
+
+SQL> select * from student;
+
+       SID NAME                 ADDRESS                     AGE
+---------- -------------------- -------------------- ----------
+         1 ram                  hyd                          20
+         2 raj                  chennai                      22
+         3 oscar                tanzania                     22
+         4 bahati               tanzania                     22
+         5 janquelin            tanzania                     22
+
+
+
+
+
+SQL> select s.sid,s.name,s.address,s.age,c.cid,c.cname,c.startdate from
+ student s inner join course c on s.sid=c.sid;
+
+       SID NAME                 ADDRESS                     AGE        CID
+---------- -------------------- -------------------- ---------- ----------
+CNAME                STARTDATE
+-------------------- ---------
+         2 raj                  chennai                      22        101
+java                 09-JAN-22
+
+         3 oscar                tanzania                     22        102
+oracle               09-JAN-22
+
+         1 ram                  hyd                          20        104
+php                  09-JAN-22
+
+
+SQL> set line size 100
+SP2-0268: linesize option not a valid number
+SQL> set linesize 100
+SQL> select s.sid,s.name,s.address,s.age,c.cid,c.cname,c.startdate from student s inner join course c on s.sid=c.sid;
+
+       SID NAME                 ADDRESS                     AGE        CID CNAME
+---------- -------------------- -------------------- ---------- ---------- --------------------
+STARTDATE
+---------
+         2 raj                  chennai                      22        101 java
+09-JAN-22
+
+         3 oscar                tanzania                     22        102 oracle
+09-JAN-22
+
+         1 ram                  hyd                          20        104 php
+09-JAN-22
+
+
+SQL> select s.sid,s.name,s.address,s.age,c.cid,c.cname from student s inner join course c on s.sid=c.sid;
+
+       SID NAME                 ADDRESS                     AGE        CID CNAME
+---------- -------------------- -------------------- ---------- ---------- --------------------
+         2 raj                  chennai                      22        101 java
+         3 oscar                tanzania                     22        102 oracle
+         1 ram                  hyd                          20        104 php
+
+SQL> select s.sid,s.name,s.age,c.cid,c.cname from student s inner join course c on s.sid=c.sid;
+
+       SID NAME                        AGE        CID CNAME
+---------- -------------------- ---------- ---------- --------------------
+         2 raj                          22        101 java
+         3 oscar                        22        102 oracle
+         1 ram                          20        104 php
+
+SQL> select s.sid,s.name,s.age,c.cid,c.cname from student s left outer join course c on s.sid=c.sid;
+
+       SID NAME                        AGE        CID CNAME
+---------- -------------------- ---------- ---------- --------------------
+         2 raj                          22        101 java
+         3 oscar                        22        102 oracle
+         1 ram                          20        104 php
+         5 janquelin                    22
+         4 bahati                       22
+
+SQL> select s.sid,s.name,s.age,c.cid,c.cname from student s right outer join course c on s.sid=c.sid;
+
+       SID NAME                        AGE        CID CNAME
+---------- -------------------- ---------- ---------- --------------------
+         1 ram                          20        104 php
+         2 raj                          22        101 java
+         3 oscar                        22        102 oracle
+                                                  106 mysql
+                                                  105 hibernate
+                                                  103 spring
+
+6 rows selected.
+
+SQL> select s.sid,s.name,s.age,c.cid,c.cname from student s full outer join course c on s.sid=c.sid;
+
+       SID NAME                        AGE        CID CNAME
+---------- -------------------- ---------- ---------- --------------------
+         2 raj                          22        101 java
+         3 oscar                        22        102 oracle
+         1 ram                          20        104 php
+                                                  103 spring
+                                                  105 hibernate
+                                                  106 mysql
+         5 janquelin                    22
+         4 bahati                       22
+
+8 rows selected.
+
+SQL> select s.sid,s.name,c.cid,c.cname from student s cross join course c;
+
+       SID NAME                        CID CNAME
+---------- -------------------- ---------- --------------------
+         1 ram                         101 java
+         1 ram                         102 oracle
+         1 ram                         104 php
+         1 ram                         103 spring
+         1 ram                         105 hibernate
+         1 ram                         106 mysql
+         2 raj                         101 java
+         2 raj                         102 oracle
+         2 raj                         104 php
+         2 raj                         103 spring
+         2 raj                         105 hibernate
+
+       SID NAME                        CID CNAME
+---------- -------------------- ---------- --------------------
+         2 raj                         106 mysql
+         3 oscar                       101 java
+         3 oscar                       102 oracle
+         3 oscar                       104 php
+         3 oscar                       103 spring
+         3 oscar                       105 hibernate
+         3 oscar                       106 mysql
+         4 bahati                      101 java
+         4 bahati                      102 oracle
+         4 bahati                      104 php
+         4 bahati                      103 spring
+
+       SID NAME                        CID CNAME
+---------- -------------------- ---------- --------------------
+         4 bahati                      105 hibernate
+         4 bahati                      106 mysql
+         5 janquelin                   101 java
+         5 janquelin                   102 oracle
+         5 janquelin                   104 php
+         5 janquelin                   103 spring
+         5 janquelin                   105 hibernate
+         5 janquelin                   106 mysql
+
+30 rows selected.
+
+SQL> select s.sid,s.name,c.cid,c.cname from student s cross join course c;
