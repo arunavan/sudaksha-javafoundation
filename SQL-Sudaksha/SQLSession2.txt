@@ -1,0 +1,634 @@
+SQL> create table product (id number primary key,name varchar(20) not null,
+  2  mname varchar(20) unique , mdate date,price number check( price >100));
+
+Table created.
+
+SQL> insert into product values(101,'bag','sony
+  2  ','09-oct-2021',500);
+
+1 row created.
+
+
+SQL> insert into product values(102,'box','abc','07-sep-2020',150);
+
+1 row created.
+
+
+
+SQL> insert into product values(104,'box4','abc3','07-sep-2020',650);
+
+1 row created.
+
+
+
+SQL> insert into product values(105,'box4','abc4','07-sep-2020',650);
+
+1 row created.
+
+SQL> select * from product;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 09-OCT-21        500
+       102 box                  abc                  07-SEP-20        150
+       104 box4                 abc3                 07-SEP-20        650
+       105 box4                 abc4                 07-SEP-20        650
+
+SQL> insert into product(id,name) values(106,'table');
+
+1 row created.
+
+SQL> insert into product values(107,'table7',null,null,null);
+
+
+Update:
+==================================
+
+
+SQL> update product set name='mobile' where id=105;
+
+1 row updated.
+
+SQL> select * from product;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 09-OCT-21        500
+       102 box                  abc                  07-SEP-20        150
+       104 box4                 abc3                 07-SEP-20        650
+       105 mobile               abc4                 07-SEP-20        650
+       106 table
+       107 table7
+
+6 rows selected.
+
+SQL> update product set name='tab',mname='lg',price=999 where id=106 ;
+
+1 row updated.
+
+SQL> select * from product;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 09-OCT-21        500
+       102 box                  abc                  07-SEP-20        150
+       104 box4                 abc3                 07-SEP-20        650
+       105 mobile               abc4                 07-SEP-20        650
+       106 tab                  lg                                    999
+       107 table7
+
+6 rows selected.
+
+SQL> update product set mdate='01-jan-2023';
+
+6 rows updated.
+
+SQL> select * from product;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 01-JAN-23        500
+       102 box                  abc                  01-JAN-23        150
+       104 box4                 abc3                 01-JAN-23        650
+       105 mobile               abc4                 01-JAN-23        650
+       106 tab                  lg                   01-JAN-23        999
+       107 table7                                    01-JAN-23
+
+6 rows selected.
+
+Delete
+======================================
+SQL> delete from product where id=104;
+
+1 row deleted.
+
+SQL> select * from product;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 01-JAN-23        500
+       102 box                  abc                  01-JAN-23        150
+       105 mobile               abc4                 01-JAN-23        650
+       106 tab                  lg                   01-JAN-23        999
+       107 table7                                    01-JAN-23
+
+SQL> delete from product where mname is null;
+
+
+Select:
+===================
+SQL> select * from product
+  2  ;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 01-JAN-23        500
+       102 box                  abc                  01-JAN-23        150
+       105 mobile               abc4                 01-JAN-23        650
+       106 tab                  lg                   01-JAN-23        999
+
+SQL> select id,name from product;
+
+        ID NAME
+---------- --------------------
+       101 bag
+       102 box
+       105 mobile
+       106 tab
+
+SQL> select name ||'='||mname from product;
+
+NAME||'='||MNAME
+-----------------------------------------
+bag=sony
+box=abc
+mobile=abc4
+tab=lg
+
+SQL> select name,price,price*2 from product;
+
+NAME                      PRICE    PRICE*2
+-------------------- ---------- ----------
+bag                         500       1000
+box                         150        300
+mobile                      650       1300
+tab                         999       1998
+
+
+
+SQL> select upper(name),lower(name),initcap(name) from product;
+
+UPPER(NAME)          LOWER(NAME)          INITCAP(NAME)
+-------------------- -------------------- --------------------
+BAG                  bag                  Bag
+BOX                  box                  Box
+MOBILE               mobile               Mobile
+TAB                  tab                  Tab
+
+SQL> select id,name,price from product where price<500;
+
+
+Order by:
+=======================SQL> select id,name,price from product order by name;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       101 bag                         500
+       102 box                         150
+       105 mobile                      650
+       106 tab                         999
+
+SQL> select id,name,price from product order by name desc;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       106 tab                         999
+       105 mobile                      650
+       102 box                         150
+       101 bag                         500
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       102 box                         150
+
+SQL> select id,name,price from product where price>500;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       105 mobile                      650
+       106 tab                         999
+
+SQL> select id,name,price from product where price=650;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       105 mobile                      650
+
+SQL> select id,name,price from product;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       101 bag                         500
+       102 box                         150
+       105 mobile                      650
+       106 tab                         999
+
+SQL> select id,name,price from product order by price;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       102 box                         150
+       101 bag                         500
+       105 mobile                      650
+       106 tab                         999
+
+SQL> select id,name,price from product order by id;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       101 bag                         500
+       102 box                         150
+       105 mobile                      650
+       106 tab                         999
+
+SQL> select id,name,price from product order by name name desc;
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       106 tab                         999
+       105 mobile                      650
+       102 box                         150
+       101 bag                         500
+
+distinct:
+SQL> select distinct name from product;
+
+
+
+agregate functions:  sum(),avg(),count(),max(),min()
+
+SQL> select sum(price) from product;
+
+SUM(PRICE)
+----------
+      2299
+
+SQL> select avg(price) from product;
+
+AVG(PRICE)
+----------
+    574.75
+
+SQL> select max(price) from product;
+
+MAX(PRICE)
+----------
+       999
+
+SQL> select min(price) from product;
+
+MIN(PRICE)
+----------
+       150
+
+SQL> select count(price) from product;
+
+COUNT(PRICE)
+------------
+           4
+
+SQL> select *  from product;
+
+        ID NAME                 MNAME                MDATE          PRICE
+---------- -------------------- -------------------- --------- ----------
+       101 bag                  sony                 01-JAN-23        500
+       102 box                  abc                  01-JAN-23        150
+       105 mobile               abc4                 01-JAN-23        650
+       106 tab                  lg                   01-JAN-23        999
+       107 box
+       108 bag
+
+6 rows selected.
+
+SQL> select count(price) from product;
+
+COUNT(PRICE)
+------------
+           4
+
+SQL> select count(id) from product;
+
+ COUNT(ID)
+----------
+         6
+
+SQL> select count(*) from product;
+
+  COUNT(*)
+----------
+         6
+
+SQL> select max(name) from product;
+
+MAX(NAME)
+--------------------
+tab
+
+SQL> select min(name) from product;
+
+
+Group by:
+SQL> select name,sum(price) from product group by name;
+
+NAME                 SUM(PRICE)
+-------------------- ----------
+tab                        1949
+bag                        1450
+mobile                      650
+box                        1100
+
+SQL> select name,sum(price),avg(price) from product group by name;
+
+NAME                 SUM(PRICE) AVG(PRICE)
+-------------------- ---------- ----------
+tab                        1949      974.5
+bag                        1450        725
+mobile                      650        650
+box                        1100        550
+
+SQL> select name,count(price),sum(price),avg(price) from product group by name;
+
+NAME                 COUNT(PRICE) SUM(PRICE) AVG(PRICE)
+-------------------- ------------ ---------- ----------
+tab                             2       1949      974.5
+bag                             2       1450        725
+mobile                          1        650        650
+box                             2       1100        550
+
+SQL> select name,max(price),min(price),count(price),sum(price),avg(price) from product group by name;
+
+NAME                 MAX(PRICE) MIN(PRICE) COUNT(PRICE) SUM(PRICE) AVG(PRICE)
+-------------------- ---------- ---------- ------------ ---------- ----------
+tab                         999        950            2       1949      974.5
+bag                         950        500            2       1450        725
+mobile                      650        650            1        650        650
+box                         950        150            2       1100        550
+
+SQL>
+SQL> select name,max(price),min(price),count(price),sum(price),avg(price) from product group by name having name='tab' or name='bag';
+
+NAME                 MAX(PRICE) MIN(PRICE) COUNT(PRICE) SUM(PRICE) AVG(PRICE)
+-------------------- ---------- ---------- ------------ ---------- ----------
+tab                         999        950            2       1949      974.5
+bag                         950        500            2       1450        725
+
+Beween- and,,  In  ,like
+
+SQL> select name,mname,price from product where name not in('tab','bag');
+
+NAME                 MNAME                     PRICE
+-------------------- -------------------- ----------
+box                  abc                         150
+mobile               abc4                        650
+box
+box                  1abc                        950
+
+SQL> select name,mname,price from product where name  in('tab','bag');
+
+NAME                 MNAME                     PRICE
+-------------------- -------------------- ----------
+bag                  sony                        500
+tab                  lg                          999
+bag
+bag                  2abc                        950
+tab                  7abc                        950
+
+SQL> select name,mname,price from product where price between 500 and 900;
+
+NAME                 MNAME                     PRICE
+-------------------- -------------------- ----------
+bag                  sony                        500
+mobile               abc4                        650
+
+SQL> select name,mname,price from product where price not between 500 and 900;
+
+NAME                 MNAME                     PRICE
+-------------------- -------------------- ----------
+box                  abc                         150
+tab                  lg                          999
+box                  1abc                        950
+bag                  2abc                        950
+tab                  7abc                        950
+
+SQL> select id,name,price from product where name not like 'b%';
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       105 mobile                      650
+       106 tab                         999
+       112 tab                         950
+
+SQL> select id,name,price from product where name  like 't%';
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       106 tab                         999
+       112 tab                         950
+
+SQL> select id,name,price from product where name  like '%b';
+
+        ID NAME                      PRICE
+---------- -------------------- ----------
+       106 tab                         999
+       112 tab                         950
+
+operators:
+
++ ,- ,* ,/ ,= ,!=,< ,>,<= ,>=
+
+mathematical functions:
+SQL> select sqrt(price),price from product;
+
+SQRT(PRICE)      PRICE
+----------- ----------
+ 22.3606798        500
+ 12.2474487        150
+ 25.4950976        650
+ 31.6069613        999
+
+
+   30.82207        950
+   30.82207        950
+   30.82207        950
+
+9 rows selected.
+
+SQL> select sqrt(price),price from product;
+
+SQRT(PRICE)      PRICE
+----------- ----------
+ 22.3606798        500
+ 12.2474487        150
+ 25.4950976        650
+ 31.6069613        999
+
+
+   30.82207        950
+   30.82207        950
+   30.82207        950
+
+9 rows selected.
+
+SQL> select power(5,3) from dual;
+
+POWER(5,3)
+----------
+       125
+
+SQL> select sqrt(625) from dual;
+
+ SQRT(625)
+----------
+        25
+
+SQL> select abs(625) from dual;
+
+  ABS(625)
+----------
+       625
+
+SQL> select abs(-625) from dual;
+
+ ABS(-625)
+----------
+       625
+
+SQL> select mod(10,3) from dual;
+
+ MOD(10,3)
+----------
+         1
+
+SQL> select trunc(34.23) from dual;
+
+TRUNC(34.23)
+------------
+          34
+
+SQL> select round(75765.23244,2) from dual;
+
+ROUND(75765.23244,2)
+--------------------
+            75765.23
+
+SQL> select name,length(name),upper(name),lpad(name,10,'-') from product;
+
+NAME                 LENGTH(NAME) UPPER(NAME)
+-------------------- ------------ --------------------
+LPAD(NAME,10,'-')
+----------------------------------------
+bag                             3 BAG
+-------bag
+
+box                             3 BOX
+-------box
+
+mobile                          6 MOBILE
+----mobile
+
+
+NAME                 LENGTH(NAME) UPPER(NAME)
+-------------------- ------------ --------------------
+LPAD(NAME,10,'-')
+----------------------------------------
+tab                             3 TAB
+-------tab
+
+box                             3 BOX
+-------box
+
+bag                             3 BAG
+-------bag
+
+
+NAME                 LENGTH(NAME) UPPER(NAME)
+-------------------- ------------ --------------------
+LPAD(NAME,10,'-')
+----------------------------------------
+box                             3 BOX
+-------box
+
+bag                             3 BAG
+-------bag
+
+tab                             3 TAB
+-------tab
+
+
+9 rows selected.
+
+SQL> select name,length(name),lpad(name,10,'-') from product;
+
+NAME                 LENGTH(NAME) LPAD(NAME,10,'-')
+-------------------- ------------ ----------------------------------------
+bag                             3 -------bag
+box                             3 -------box
+mobile                          6 ----mobile
+tab                             3 -------tab
+box                             3 -------box
+bag                             3 -------bag
+box                             3 -------box
+bag                             3 -------bag
+tab                             3 -------tab
+
+9 rows selected.
+
+SQL> select mod(10,3) from dual;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
