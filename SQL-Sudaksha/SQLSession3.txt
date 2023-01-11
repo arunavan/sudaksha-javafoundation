@@ -1,0 +1,234 @@
+PLSQL:
+=====================
+
+program1  to declare anumber and print it.
+
+declare
+  2  a number;
+  3  begin
+  4  a:=10;
+  5  dbms_output.put_line('Number:'||a);
+  6  end;
+  7  /
+
+SQL> /   -> to run the program   or
+SQL> RUN -> to run the program   or
+SQL> set serveroutput on
+SQL> save p1    -> to save plsql block/program
+SQL> start p1.sql    or
+SQL> run p1.sql
+SQL> ed   -> to edit previous program
+   to exit from editor     Alt+F +X   save
+SQL>
+
+Program2 to read 2 input and find sum
+SQL> declare
+  2  a number;
+  3  b number;
+  4  c number;
+  5  begin
+  6  a:=&a;
+  7  b:=&b;
+  8  c:=a+b;
+  9  dbms_output.put_line('Sum='||c);
+ 10  end;
+ 11  /
+
+
+Program to test given number is even or odd:
+SQL> declare
+  2  a number;
+  3  begin
+  4  a:=&a;
+  5  if (mod(a,2)=0) then
+  6  dbms_output.put_line('even');
+  7  else
+  8  dbms_output.put_line('odd');
+  9  end if;
+ 10  end;
+ 11  /
+
+
+
+Program to print numbers from 1 to 10
+SQL> declare
+  2  a number;
+  3  begin
+  4  for a in 1..10
+  5  loop
+  6  dbms_output.put_line('Number:'||a);
+  7  end loop;
+  8  end;
+  9  /
+
+Prorga to print numbers in reverse order upto given number a
+SQL> declare
+  2  a number;
+  3  begin
+  4  a:=&a;
+  5  for i in reverse 1..a
+  6  loop
+  7  dbms_output.put_line(i);
+  8  end loop;
+  9  end;
+ 10  /
+
+Program with while loop:
+SQL> declare
+  2  a number;
+  3  begin
+  4  a:=1;
+  5  while(a<=20)
+  6  loop
+  7  dbms_output.put_line(a);
+  8  a:=a+1;
+  9  end loop;
+ 10  end;
+ 11  /
+
+Program with Exit - when
+
+SQL> declare
+  2  a number;
+  3  x number;
+  4  begin
+  5  x:=1;
+  6  a:=&a;
+  7  loop
+  8  dbms_output.put_line(x);
+  9  x:=x+1;
+ 10  exit when (x>a);
+ 11  end loop;
+ 12  end;
+ 13  /
+
+Enter value for a: 10
+
+
+Stored Procedure:
+
+SQL> create  procedure sq123(x number) as
+  2  y number;
+  3  begin
+  4  y:=x*x;
+  5  dbms_output.put_line('Square='||y);
+  6  end;
+  7  /
+
+
+SQL>call sq123(4);
+
+SQL>execute sq123(5);
+
+
+Procedure with table data:
+
+SQL> create or replace procedure dispname(id1 number) as
+  2  name1 varchar(20);
+  3  begin
+  4  select name into name1 from emp where id=id1;
+  5  dbms_output.put_line(name1);
+  6  end;
+  7  /
+
+Procedure created.
+
+SQL> call dispname(2);
+
+Task: create product table with produdtcid,name,quantity,price.
+create a procedure  name getproductdetails(pid number)
+to display product name,quantity and price details for given id.
+
+
+
+
+
+
+bahati
+
+Case -end case statement (switch)
+
+SQL> DECLARE
+     grade char(1) := 'B';
+     BEGIN
+      case
+          when grade = 'A' then 
+                 dbms_output.put_line('Excellent');
+          when grade = 'B' then 
+                dbms_output.put_line('Very good');
+          when grade = 'C' then 
+                dbms_output.put_line('Well done')             ;
+         else dbms_output.put_line('No such grade');
+      end case;
+     END;
+
+
+
+function:
+
+CREATE OR REPLACE FUNCTION totalemp 
+RETURN number IS 
+   total number(2) := 0; 
+BEGIN 
+   SELECT count(*) into total 
+   FROM emp; 
+    
+   RETURN total; 
+END; 
+
+
+===in out parameters
+DECLARE 
+   a number; 
+   b number; 
+   c number;
+PROCEDURE findMin(x IN number, y IN number, z OUT number) IS 
+BEGIN 
+   IF x < y THEN 
+      z:= x; 
+   ELSE 
+      z:= y; 
+   END IF; 
+END;   
+BEGIN 
+   a:= 23; 
+   b:= 45; 
+   findMin(a, b, c); 
+   dbms_output.put_line(' Minimum of (23, 45) : ' || c); 
+END; 
+/
+
+
+===============cursor   implicit and explicit
+DECLARE  
+   total_rows number(2); 
+BEGIN 
+   UPDATE customers 
+   SET salary = salary + 500; 
+   IF sql%notfound THEN 
+      dbms_output.put_line('no customers selected'); 
+   ELSIF sql%found THEN 
+      total_rows := sql%rowcount;
+      dbms_output.put_line( total_rows || ' customers selected '); 
+   END IF;  
+END; 
+/      
+
+
+
+DECLARE 
+   c_id customers.id%type; 
+   c_name customers.name%type; 
+   c_addr customers.address%type; 
+   CURSOR c_customers is 
+      SELECT id, name, address FROM customers; 
+BEGIN 
+   OPEN c_customers; 
+   LOOP 
+   FETCH c_customers into c_id, c_name, c_addr; 
+      EXIT WHEN c_customers%notfound; 
+      dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_addr); 
+   END LOOP; 
+   CLOSE c_customers; 
+END; 
+/
