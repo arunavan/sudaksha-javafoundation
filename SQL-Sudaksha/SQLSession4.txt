@@ -1,0 +1,125 @@
+
+program1=procedure
+======================
+
+create or replace procedure updateproduct(pid number) as
+  2  price1 number;
+  3  begin
+  4  select price into price1 from product where id=pid;
+  5  update product set price=price1;
+  6  end;
+
+
+
+
+====program 2
+
+create or replace procedure updateproduct(pid number) as
+   price1 number;
+   id1 number;
+   name1 varchar(20);
+
+    begin
+
+    select price,id,name into price1,id1,name1 from product where id=pid;
+	dbms_output.put_line('Id:'||id1);
+	dbms_output.put_line('Name:'||name1);
+	dbms_output.put_line('Price:'||price1);
+    delete from product where price<price1;
+    
+   end;
+
+
+program 3  -- in out parameters
+
+DECLARE 
+   a number; 
+   b number; 
+   c number;
+	PROCEDURE findMin(x IN number, y IN number, z OUT number) IS 
+	BEGIN 
+  	 IF x < y THEN 
+   	   z:= x; 
+   	ELSE 
+    	  z:= y; 
+   	END IF; 
+	END;   
+BEGIN 
+   a:= &a; 
+   b:= &b;
+   findMin(a, b, c); 
+   dbms_output.put_line(' Minimum of given two numbers is  : ' || c); 
+END; 
+
+
+Program 4---in out 
+
+DECLARE 
+   a number; 
+   b number; 
+	PROCEDURE sq(x IN number, y  OUT number) IS 
+	BEGIN 
+  	 y:=x*x;
+	END;   
+BEGIN 
+   a:= &a; 
+   sq(a, b); 
+   dbms_output.put_line(' Square of  of given  number is  : ' || b); 
+END; 
+/
+
+
+
+Program 5-----------function
+DECLARE 
+   a number; 
+   b number; 
+	function sq1(x  number) return  number IS 
+        y number;
+	BEGIN 
+  	 y:=x*x;
+	return y;
+	END;   
+BEGIN 
+   a:= &a; 
+   b:=sq1(a); 
+   dbms_output.put_line(' Square of  of given  number is using function is   : ' || b); 
+END; 
+/
+
+
+====Program 6    implicit
+
+DECLARE  
+   total  number(2); 
+BEGIN 
+   UPDATE product  
+   SET price = price + 100; 
+   IF sql%notfound THEN 
+      dbms_output.put_line('no products selected'); 
+   ELSIF sql%found THEN 
+      total := sql%rowcount;
+      dbms_output.put_line( total || ' product updated '); 
+   END IF;  
+END; 
+/
+
+
+================Program 7
+DECLARE 
+   pid product.id%type; 
+   pname product.name%type; 
+   pprice product.price%type; 
+              /* cursor%found   cursor%notfound cursor%isopen cursor%rowcount */
+   CURSOR prodcursor is 
+      SELECT id, name,price FROM product; 
+BEGIN 
+   OPEN prodcursor; 
+   LOOP 
+   FETCH prodcursor into pid, pname, pprice; 
+      EXIT WHEN prodcursor%notfound; 
+      dbms_output.put_line(pid|| ' ' ||pname || ' ' || pprice); 
+   END LOOP; 
+   CLOSE prodcursor; 
+END; 
+/
