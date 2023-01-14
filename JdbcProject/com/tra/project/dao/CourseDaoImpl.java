@@ -2,6 +2,8 @@ package com.tra.project.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import com.tra.project.exception.CourseNotFoundException;
 import com.tra.project.model.Course;
 import com.tra.project.util.DbConn;
 public class CourseDaoImpl implements CourseDao{
@@ -22,20 +24,43 @@ public class CourseDaoImpl implements CourseDao{
 			System.out.println(rs.getString(1)+"  "+rs.getString(2));	
 			}
     }
-	public  void deleteCourse(Course course) throws Exception{
+	public  void deleteCourse(Integer id) throws Exception{
 		    Connection con=DbConn.getConnection();
-			PreparedStatement pst=con.prepareStatement("delete from course where cid=?");
-		    pst.setInt(1, course.getId());
-		    pst.execute();
+		    con.setAutoCommit(false);
+		    PreparedStatement pst=con.prepareStatement("select * from course where cid=?");
+		    pst.setInt(1, id);
+		    ResultSet rs=pst.executeQuery();
+		    if(rs.next()==false) {
+		    		throw new CourseNotFoundException("Id not present");
+		    }
+		    else {
+			PreparedStatement pst1=con.prepareStatement("delete from course where cid=?");
+			pst1.setInt(1, id);
+		    pst1.execute();
+		    con.commit();
+		    }
 		    System.out.println("Course deleted successfully......");
 		
 	}
-	public  void updateCourse(Course course) throws Exception{
+	public  void updateCourse(Integer id,String name) throws Exception{
 		Connection con=DbConn.getConnection();
-		PreparedStatement pst=con.prepareStatement("update course  set cname=? where cid=?");
-	    pst.setInt(2, course.getId());
-	    pst.setString(1,course.getName());
-	    pst.execute();
+		con.setAutoCommit(false);
+		PreparedStatement pst=con.prepareStatement("select * from course where cid=?");
+	    pst.setInt(1, id);
+	    ResultSet rs=pst.executeQuery();
+	    if(rs.next()==false) {
+	    		throw new CourseNotFoundException("Id not present");
+	    }
+	    else
+	    {
+		PreparedStatement pst1=con.prepareStatement("update course  set cname=? where cid=?");
+	    //pst.setInt(2, course.getId());
+		pst1.setInt(2, id);
+	    //pst.setString(1,course.getName());
+		pst1.setString(1,name);
+	    pst1.execute();
+	    con.commit();
+	    }
 	    System.out.println("Course name updated successfully......");
 		
 	}
